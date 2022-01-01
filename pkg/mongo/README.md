@@ -1,0 +1,3 @@
+# mongo
+
+Mongo helper library.
