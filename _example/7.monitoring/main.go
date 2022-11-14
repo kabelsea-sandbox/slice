@@ -5,14 +5,15 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di"
+	"slice/pkg/di"
+
 	"go.opencensus.io/plugin/ocgrpc"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/bundle/monitoring"
+	"slice"
+	"slice/bundle/monitoring"
 )
 
 var (

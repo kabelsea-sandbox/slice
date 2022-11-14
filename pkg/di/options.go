@@ -1,7 +1,7 @@
 package di
 
 import (
-	"github.com/kabelsea-sanbox/slice/pkg/di/internal/stacktrace"
+	"slice/pkg/di/internal/stacktrace"
 )
 
 // Option is a functional option that configures container. If you don't know about functional

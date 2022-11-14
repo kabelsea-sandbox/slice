@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/kabelsea-sanbox/slice"
+	"slice"
 )
 
 type FirstBundle struct {

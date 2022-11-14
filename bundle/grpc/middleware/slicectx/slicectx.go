@@ -5,7 +5,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/kabelsea-sanbox/slice"
+	"slice"
 )
 
 // UnaryServerInterceptor return unary server interceptor that join application context and request context.

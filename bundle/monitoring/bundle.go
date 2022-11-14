@@ -5,12 +5,13 @@ import (
 
 	"contrib.go.opencensus.io/exporter/prometheus"
 	"github.com/pkg/errors"
+	goprometheus "github.com/prometheus/client_golang/prometheus"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"
 
-	"github.com/kabelsea-sanbox/slice"
-	httpbundle "github.com/kabelsea-sanbox/slice/bundle/http"
-	"github.com/kabelsea-sanbox/slice/pkg/di"
+	"slice"
+	httpbundle "slice/bundle/http"
+	"slice/pkg/di"
 )
 
 // Interface helpers for di.As(..)
@@ -30,8 +31,10 @@ type MetricViews interface {
 
 // Bundle is a bundle that provides configured monitoring.
 type Bundle struct {
-	MetricsEnabled bool `envconfig:"metrics_enabled"`
-	TraceEnabled   bool `envconfig:"trace_enabled"`
+	MetricsEnabled   bool   `envconfig:"metrics_enabled" default:"False"`
+	MetricsDefault   bool   `envconfig:"metrics_default" default:"True"`
+	MetricsNamespace string `envconfig:"metrics_namespace" default:"monitoring"`
+	TraceEnabled     bool   `envconfig:"trace_enabled" default:"False"`
 }
 
 // DependOn
@@ -76,7 +79,16 @@ func (b *Bundle) Shutdown(_ context.Context, _ slice.Container) (err error) {
 
 // NewPrometheusExporter creates prometheus exporter.
 func (b *Bundle) NewPrometheusExporter() (*prometheus.Exporter, error) {
-	exporter, err := prometheus.NewExporter(prometheus.Options{})
+	var registry *goprometheus.Registry
+
+	if b.MetricsDefault {
+		registry = goprometheus.DefaultRegisterer.(*goprometheus.Registry)
+	}
+
+	exporter, err := prometheus.NewExporter(prometheus.Options{
+		Namespace: b.MetricsNamespace,
+		Registry:  registry,
+	})
 	if err != nil {
 		return nil, errors.Wrap(err, "prometheus exporter")
 	}

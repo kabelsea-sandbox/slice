@@ -7,9 +7,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/kabelsea-sanbox/slice/_example/2.bundle/httpserver"
+	"slice/_example/2.bundle/httpserver"
 
-	"github.com/kabelsea-sanbox/slice"
+	"slice"
 )
 
 // StartServer

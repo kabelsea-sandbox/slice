@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di/internal/reflection"
+	"slice/pkg/di/internal/reflection"
 )
 
 // ctorType describes types of constructor provider.

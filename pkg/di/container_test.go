@@ -11,7 +11,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di"
+	"slice/pkg/di"
 )
 
 func TestContainer_Resolve(t *testing.T) {

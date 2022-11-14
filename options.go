@@ -3,8 +3,8 @@ package slice
 import (
 	"time"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di"
-	"github.com/kabelsea-sanbox/slice/pkg/run"
+	"slice/pkg/di"
+	"slice/pkg/run"
 )
 
 // Option is a application option. All diopts starts with Set prefix.

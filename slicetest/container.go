@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/pkg/di"
+	"slice"
+	"slice/pkg/di"
 )
 
 // NewTestContainer

@@ -7,7 +7,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di"
+	"slice/pkg/di"
 )
 
 // Initialization step of application lifecycle. It collects user dependency injection

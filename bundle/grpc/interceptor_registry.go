@@ -3,10 +3,10 @@ package grpc
 import (
 	"google.golang.org/grpc"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/bundle/grpc/middleware/ratelimit"
-	"github.com/kabelsea-sanbox/slice/bundle/grpc/middleware/slicectx"
-	"github.com/kabelsea-sanbox/slice/pkg/grpczap"
+	"slice"
+	"slice/bundle/grpc/middleware/ratelimit"
+	"slice/bundle/grpc/middleware/slicectx"
+	"slice/pkg/grpczap"
 )
 
 // interceptorRegistry registers and store interceptors for GRPC server.

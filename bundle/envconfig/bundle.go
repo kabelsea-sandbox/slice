@@ -5,7 +5,7 @@ import (
 
 	"github.com/kelseyhightower/envconfig"
 
-	"github.com/kabelsea-sanbox/slice"
+	"slice"
 )
 
 // Options is a interface that will be loaded by envconfig bundle on boot stage and processed via envconfig.

@@ -6,10 +6,10 @@ import (
 	"github.com/go-pg/pg/v9"
 	"github.com/go-pg/pg/v9/orm"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/pkg/di"
-	"github.com/kabelsea-sanbox/slice/pkg/gopg"
-	ctxgopg "github.com/kabelsea-sanbox/slice/pkg/gopg/ctx"
+	"slice"
+	"slice/pkg/di"
+	"slice/pkg/gopg"
+	ctxgopg "slice/pkg/gopg/ctx"
 )
 
 // Bundle is a postgres bundle. It provides configured database instance and provide db into slice.Context.

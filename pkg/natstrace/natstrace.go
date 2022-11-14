@@ -7,7 +7,7 @@ import (
 	"go.opencensus.io/trace"
 	"go.opencensus.io/trace/propagation"
 
-	"github.com/kabelsea-sanbox/slice/pkg/natsclient"
+	"slice/pkg/natsclient"
 )
 
 // Tracing

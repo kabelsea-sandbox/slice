@@ -8,7 +8,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/stretchr/testify/require"
 
-	"github.com/kabelsea-sanbox/slice/slicetest"
+	"slice/slicetest"
 )
 
 var (

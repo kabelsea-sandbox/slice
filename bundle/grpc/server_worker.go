@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/kabelsea-sanbox/slice"
+	"slice"
 )
 
 // ServerWorker is a grpc server worker.
@@ -18,8 +18,9 @@ type ServerWorker struct {
 
 // Run runs grpc server worker.
 func (d *ServerWorker) Run(context.Context) error {
-	d.logger.Debugf("grpc-bundle", "Starting grpc server")
-	defer d.logger.Debugf("grpc-bundle", "Stopping grpc server")
+	d.logger.Infof("grpc", "Starting grpc server")
+	defer d.logger.Infof("grpc", "Stopping grpc server")
+
 	l, err := net.Listen("tcp", net.JoinHostPort("", d.port))
 	if err != nil {
 		return err

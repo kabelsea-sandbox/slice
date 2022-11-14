@@ -10,7 +10,7 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di"
+	"slice/pkg/di"
 )
 
 func TestLifecycle_initialization(t *testing.T) {

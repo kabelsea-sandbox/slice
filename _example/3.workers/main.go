@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di"
-
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/bundle/zap"
-	"github.com/kabelsea-sanbox/slice/pkg/run"
+	"slice"
+	"slice/bundle/zap"
+	"slice/pkg/di"
+	"slice/pkg/run"
 )
 
 // Application

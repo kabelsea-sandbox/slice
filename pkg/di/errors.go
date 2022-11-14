@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di/internal/stacktrace"
+	"slice/pkg/di/internal/stacktrace"
 )
 
 // isUsageError return true if err is library usage error.
@@ -111,5 +111,5 @@ func (e errHaveSeveralInstances) Error() string {
 }
 
 func bug() {
-	panic("you found a bug, please create new issue for this: https://github.com/kabelsea-sanbox/slice/pkg/di/issues/new")
+	panic("you found a bug, please create new issue for this: https://slice/pkg/di/issues/new")
 }

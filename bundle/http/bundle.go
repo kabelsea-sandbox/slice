@@ -8,9 +8,9 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/pkg/di"
-	"github.com/kabelsea-sanbox/slice/pkg/run"
+	"slice"
+	"slice/pkg/di"
+	"slice/pkg/run"
 )
 
 // Controller
@@ -22,8 +22,8 @@ type Controller interface {
 // Bundle provides http functionality
 type Bundle struct {
 	Port         string        `envconfig:"HTTP_PORT" default:"8080"`
-	ReadTimeout  time.Duration `envconfig:"HTTP_READ_TIMEOUT" default:"2s"`
-	WriteTimeout time.Duration `envconfig:"HTTP_WRITE_TIMEOUT" default:"2s"`
+	ReadTimeout  time.Duration `envconfig:"HTTP_READ_TIMEOUT" default:"5s"`
+	WriteTimeout time.Duration `envconfig:"HTTP_WRITE_TIMEOUT" default:"5s"`
 }
 
 // Build provides bundle dependencies.
@@ -34,15 +34,27 @@ func (b Bundle) Build(builder slice.ContainerBuilder) {
 }
 
 func (b Bundle) Boot(_ context.Context, container slice.Container) (err error) {
+	var mux *chi.Mux
+	if err := container.Resolve(&mux); err != nil {
+		return err
+	}
+
+	var middlewares []func(http.Handler) http.Handler
+
+	if container.Has(&middlewares) {
+		if err := container.Resolve(&middlewares); err != nil {
+			return err
+		}
+		mux.Use(middlewares...)
+	}
+
 	var controllers []Controller
+
 	if container.Has(&controllers) {
 		if err := container.Resolve(&controllers); err != nil {
 			return err
 		}
-		var mux *chi.Mux
-		if err := container.Resolve(&mux); err != nil {
-			return err
-		}
+
 		for _, ctrl := range controllers {
 			ctrl.RegisterRoutes(mux)
 		}

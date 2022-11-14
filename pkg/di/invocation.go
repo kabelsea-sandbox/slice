@@ -1,7 +1,7 @@
 package di
 
 import (
-	"github.com/kabelsea-sanbox/slice/pkg/di/internal/reflection"
+	"slice/pkg/di/internal/reflection"
 )
 
 func validateInvocation(fn reflection.Func) bool {

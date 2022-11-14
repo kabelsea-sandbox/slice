@@ -1,27 +1,25 @@
 package main
 
 import (
-	"github.com/kabelsea-sanbox/slice/pkg/di"
+	"slice/pkg/di"
+
 	"google.golang.org/grpc"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/bundle/envconfig"
-	grpcbundle "github.com/kabelsea-sanbox/slice/bundle/grpc"
-	"github.com/kabelsea-sanbox/slice/bundle/monitoring"
-	"github.com/kabelsea-sanbox/slice/bundle/zap"
+	"slice"
+	"slice/bundle/envconfig"
+	grpcbundle "slice/bundle/grpc"
+	"slice/bundle/monitoring"
+	"slice/bundle/zap"
 )
 
 // UserService
-type UserService struct {
-}
+type UserService struct{}
 
 func NewUserService() *UserService {
 	return &UserService{}
 }
 
-func (u *UserService) RegisterGRPCServer(_ *grpc.Server) {
-
-}
+func (u *UserService) RegisterGRPCServer(_ *grpc.Server) {}
 
 func main() {
 	slice.Run(

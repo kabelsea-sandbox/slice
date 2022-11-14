@@ -3,13 +3,14 @@ package main
 import (
 	"context"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di"
+	"slice/pkg/di"
+
 	"github.com/nats-io/nats.go"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/bundle/monitoring"
-	natsbundle "github.com/kabelsea-sanbox/slice/bundle/nats"
-	"github.com/kabelsea-sanbox/slice/bundle/zap"
+	"slice"
+	"slice/bundle/monitoring"
+	natsbundle "slice/bundle/nats"
+	"slice/bundle/zap"
 )
 
 type MessageHandler struct {

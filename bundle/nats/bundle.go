@@ -3,18 +3,19 @@ package nats
 import (
 	"context"
 	"os"
+	"syscall"
 	"time"
 
 	"github.com/nats-io/nats.go"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/pkg/di"
-	"github.com/kabelsea-sanbox/slice/pkg/natsclient"
-	"github.com/kabelsea-sanbox/slice/pkg/natstrace"
-	"github.com/kabelsea-sanbox/slice/pkg/natszap"
-	"github.com/kabelsea-sanbox/slice/pkg/run"
+	"slice"
+	"slice/pkg/di"
+	"slice/pkg/natsclient"
+	"slice/pkg/natstrace"
+	"slice/pkg/natszap"
+	"slice/pkg/run"
 )
 
 // MessageHandler
@@ -25,7 +26,7 @@ type MessageHandler interface {
 
 // Bundle integrates NATS.
 type Bundle struct {
-	Hosts         string `envconfig:"nats_hosts" default:"nats://localhost:4222"`
+	Hosts         string `envconfig:"nats_hosts" default:"nats://nats:4222"`
 	ClusterID     string `envconfig:"nats_cluster_id"`
 	ClientID      string `envconfig:"nats_client_id"`
 	WorkerGroup   string `envconfig:"nats_worker_group"`
@@ -64,6 +65,8 @@ func (b *Bundle) Shutdown(_ context.Context, _ slice.Container) (err error) {
 
 // NewConnection creates NATS connection.
 func (b *Bundle) NewConnection(logger *zap.Logger) (*nats.Conn, error) { // todo: remove *zap.Logger
+	defer logger.Sugar().Info("[NATS] ", "Create nats connection")
+
 	return nats.Connect(
 		b.Hosts,
 		nats.MaxReconnects(b.MaxReconnects),
@@ -81,14 +84,19 @@ func (b *Bundle) NewConnection(logger *zap.Logger) (*nats.Conn, error) { // todo
 		}),
 		nats.ClosedHandler(func(nc *nats.Conn) {
 			if err := nc.LastError(); err != nil {
-				logger.Info("NATS connection closed", zap.Error(err))
+				logger.Error("NATS connection closed", zap.Error(err))
+
+				// Exit
+				_ = syscall.Kill(os.Getpid(), syscall.SIGINT)
+			} else {
+				logger.Info("NATS connection closed")
 			}
 		}),
 	)
 }
 
 // NewClient creates client.
-func (b *Bundle) NewClient(conn *nats.Conn) *natsclient.Client {
+func (b *Bundle) NewClient(logger slice.Logger, conn *nats.Conn) *natsclient.Client {
 	return natsclient.New(conn, natsclient.ChainInterceptor(
 		natstrace.Tracing,
 		natszap.Logging, // todo: remove zap integration

@@ -9,16 +9,16 @@ import (
 	"github.com/pkg/errors"
 	"go.opencensus.io/plugin/ocgrpc"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/balancer/roundrobin"
+	"google.golang.org/grpc/reflection"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/bundle/grpc/middleware/ratelimit"
-	"github.com/kabelsea-sanbox/slice/bundle/grpc/middleware/slicectx"
-	"github.com/kabelsea-sanbox/slice/bundle/monitoring"
-	"github.com/kabelsea-sanbox/slice/pkg/di"
-	"github.com/kabelsea-sanbox/slice/pkg/grpcdial"
-	"github.com/kabelsea-sanbox/slice/pkg/grpczap"
-	"github.com/kabelsea-sanbox/slice/pkg/run"
+	"slice"
+	"slice/bundle/grpc/middleware/ratelimit"
+	"slice/bundle/grpc/middleware/slicectx"
+	"slice/bundle/monitoring"
+	"slice/pkg/di"
+	"slice/pkg/grpcdial"
+	"slice/pkg/grpczap"
+	"slice/pkg/run"
 )
 
 // Service is a grpc service interface. It will be loaded on slice boot stage and registers exists services.
@@ -33,6 +33,7 @@ type Bundle struct {
 	MaxConcurrentStreams uint32 `envconfig:"GRPC_MAX_CONCURRENT_STREAMS" default:"250"`
 	RateLimit            int    `envconfig:"GRPC_RATE_LIMIT" default:"1000"` // limit per rate period
 	RateBurst            int    `envconfig:"GRPC_RATE_BURST"`                // default limit / 10
+	Reflection           bool   `envconfig:"GRPC_REFLECTION" default:"True"`
 }
 
 // Build provides dialer, server and worker to di container.
@@ -66,10 +67,12 @@ func (b *Bundle) Boot(_ context.Context, container slice.Container) (err error) 
 	if err = container.Invoke(ir.RateLimit); err != nil {
 		return err
 	}
+
 	var services []Service
+
 	if container.Has(&services) {
 		if err = container.Invoke(b.RegisterGRPCServices); err != nil {
-			return errors.Wrap(err, "register grpc service")
+			return errors.Wrap(err, "register grpc service failed")
 		}
 	}
 	return nil
@@ -89,15 +92,16 @@ func (b *Bundle) NewDialer(ctx *slice.Context) *grpcdial.Dialer {
 				grpczap.ClientLogging(), // todo: remove grpczap link, integrate via interface.
 			),
 		),
-		grpc.WithStatsHandler(&ocgrpc.ClientHandler{}),
 		grpc.WithInsecure(),
-		grpc.WithDefaultServiceConfig(roundrobin.Name),
+		// grpc.WithDefaultServiceConfig(roundrobin.Name), // not working
+		grpc.WithStatsHandler(&ocgrpc.ClientHandler{}),
 	)
 }
 
 // NewServer creates GRPC server.
 func (b *Bundle) NewServer(registry *interceptorRegistry) *grpc.Server {
 	interceptors := registry.All()
+
 	options := []grpc.ServerOption{
 		grpc.MaxConcurrentStreams(b.MaxConcurrentStreams),
 		grpc.StatsHandler(&ocgrpc.ServerHandler{}),
@@ -105,6 +109,7 @@ func (b *Bundle) NewServer(registry *interceptorRegistry) *grpc.Server {
 			grpc_middleware.ChainUnaryServer(interceptors...),
 		),
 	}
+
 	return grpc.NewServer(options...)
 }
 
@@ -130,7 +135,13 @@ func (b *Bundle) NewMetricViews() *MetricViews {
 // RegisterGRPCServices registers GRPC services.
 func (b *Bundle) RegisterGRPCServices(logger slice.Logger, server *grpc.Server, services []Service) {
 	for _, service := range services {
-		logger.Debugf("grpc-bundle", "Register service: %s", reflect.TypeOf(service))
+		logger.Infof("grpc", "Register service: %s", reflect.TypeOf(service))
 		service.RegisterGRPCServer(server)
+	}
+
+	// Enable reflection
+	if b.Reflection && len(services) > 0 {
+		logger.Infof("grpc", "Reflection enabled")
+		reflection.Register(server)
 	}
 }

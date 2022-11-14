@@ -8,9 +8,9 @@ import (
 	"go.opencensus.io/trace"
 	"go.uber.org/zap"
 
-	"github.com/kabelsea-sanbox/slice"
-	"github.com/kabelsea-sanbox/slice/pkg/natstrace"
-	ctxzap "github.com/kabelsea-sanbox/slice/pkg/zaplog/ctx"
+	"slice"
+	"slice/pkg/natstrace"
+	ctxzap "slice/pkg/zaplog/ctx"
 )
 
 type MessageWrapperFactory struct {

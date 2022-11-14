@@ -10,7 +10,7 @@ import (
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
-	ctxzap "github.com/kabelsea-sanbox/slice/pkg/zaplog/ctx"
+	ctxzap "slice/pkg/zaplog/ctx"
 )
 
 // ClientLogging is a middleware for client logging.

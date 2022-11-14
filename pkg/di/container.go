@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/kabelsea-sanbox/slice/pkg/di/internal/reflection"
+	"slice/pkg/di/internal/reflection"
 )
 
 // Container is a dependency injection container.
@@ -32,28 +32,28 @@ type Container struct {
 //
 // Define constructors and invocations:
 //
-// 	func NewHTTPServer(mux *http.ServeMux) *http.Server {
-// 		return &http.Server{
-// 			Handler: mux,
-// 		}
-// 	}
+//	func NewHTTPServer(mux *http.ServeMux) *http.Server {
+//		return &http.Server{
+//			Handler: mux,
+//		}
+//	}
 //
-// 	func NewHTTPServeMux() *http.ServeMux {
-// 		return http.ServeMux{}
-// 	}
+//	func NewHTTPServeMux() *http.ServeMux {
+//		return http.ServeMux{}
+//	}
 //
-// 	func StartServer(server *http.Server) error {
+//	func StartServer(server *http.Server) error {
 //		return server.ListenAndServe()
 //	}
 //
 // Use it with container:
 //
-// 	container, err := di.New(
-// 		di.Provide(NewHTTPServer),
-// 		di.Provide(NewHTTPServeMux),
+//	container, err := di.New(
+//		di.Provide(NewHTTPServer),
+//		di.Provide(NewHTTPServeMux),
 //		di.Invoke(StartServer),
-// 	)
-// 	if err != nil {
+//	)
+//	if err != nil {
 //		// handle error
 //	}
 func New(options ...Option) (_ *Container, err error) {
@@ -283,7 +283,7 @@ func (c *Container) invoke(invocation Invocation, _ ...InvokeOption) error {
 
 // Has checks that type exists in container, if not it return false.
 //
-// 	var server *http.Server
+//	var server *http.Server
 //	if container.Has(&server) {
 //		// handle server existence
 //	}
