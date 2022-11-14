@@ -1,8 +1,6 @@
 package di
 
-import (
-	"slice/pkg/di/internal/reflection"
-)
+import "github.com/kabelsea-sandbox/slice/pkg/di/internal/reflection"
 
 func validateInvocation(fn reflection.Func) bool {
 	if fn.NumOut() == 0 {

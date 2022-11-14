@@ -6,7 +6,7 @@ import (
 	"github.com/go-redis/redis/v8"
 	"github.com/pkg/errors"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 // Bundle is a redis bundle.

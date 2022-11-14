@@ -5,9 +5,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 	"github.com/pkg/errors"
-
-	"slice/pkg/di"
 )
 
 // Initialization step of application lifecycle. It collects user dependency injection

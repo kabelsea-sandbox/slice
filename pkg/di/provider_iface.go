@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"slice/pkg/di/internal/reflection"
+	"github.com/kabelsea-sandbox/slice/pkg/di/internal/reflection"
 )
 
 // providerInterface

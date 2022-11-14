@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 // ServerWorker is a grpc server worker.

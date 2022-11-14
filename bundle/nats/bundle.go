@@ -10,12 +10,12 @@ import (
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 
-	"slice"
-	"slice/pkg/di"
-	"slice/pkg/natsclient"
-	"slice/pkg/natstrace"
-	"slice/pkg/natszap"
-	"slice/pkg/run"
+	"github.com/kabelsea-sandbox/slice"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice/pkg/natsclient"
+	"github.com/kabelsea-sandbox/slice/pkg/natstrace"
+	"github.com/kabelsea-sandbox/slice/pkg/natszap"
+	"github.com/kabelsea-sandbox/slice/pkg/run"
 )
 
 // MessageHandler

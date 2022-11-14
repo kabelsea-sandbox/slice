@@ -1,7 +1,7 @@
 package slicetest
 
 import (
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 // NewTestBundle

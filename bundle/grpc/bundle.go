@@ -11,14 +11,14 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"slice"
-	"slice/bundle/grpc/middleware/ratelimit"
-	"slice/bundle/grpc/middleware/slicectx"
-	"slice/bundle/monitoring"
-	"slice/pkg/di"
-	"slice/pkg/grpcdial"
-	"slice/pkg/grpczap"
-	"slice/pkg/run"
+	"github.com/kabelsea-sandbox/slice"
+	"github.com/kabelsea-sandbox/slice/bundle/grpc/middleware/ratelimit"
+	"github.com/kabelsea-sandbox/slice/bundle/grpc/middleware/slicectx"
+	"github.com/kabelsea-sandbox/slice/bundle/monitoring"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice/pkg/grpcdial"
+	"github.com/kabelsea-sandbox/slice/pkg/grpczap"
+	"github.com/kabelsea-sandbox/slice/pkg/run"
 )
 
 // Service is a grpc service interface. It will be loaded on slice boot stage and registers exists services.

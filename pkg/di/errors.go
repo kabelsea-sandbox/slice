@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"slice/pkg/di/internal/stacktrace"
+	"github.com/kabelsea-sandbox/slice/pkg/di/internal/stacktrace"
 )
 
 // isUsageError return true if err is library usage error.

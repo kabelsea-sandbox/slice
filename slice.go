@@ -7,7 +7,7 @@ import (
 	"github.com/kelseyhightower/envconfig"
 	"github.com/pkg/errors"
 
-	"slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 )
 
 // Debug is a debug flag.

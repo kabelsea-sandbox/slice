@@ -5,8 +5,8 @@ import (
 
 	"go.uber.org/zap"
 
-	"slice"
-	zapbundle "slice/bundle/zap"
+	"github.com/kabelsea-sandbox/slice"
+	zapbundle "github.com/kabelsea-sandbox/slice"
 )
 
 type foo struct {

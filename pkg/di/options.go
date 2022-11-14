@@ -1,16 +1,14 @@
 package di
 
-import (
-	"slice/pkg/di/internal/stacktrace"
-)
+import "github.com/kabelsea-sandbox/slice/pkg/di/internal/stacktrace"
 
 // Option is a functional option that configures container. If you don't know about functional
 // options, see https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis.
 // Below presented all possible options with their description:
 //
-// 	- di.Provide - provide constructors
-//	- di.Invoke - add invocations
-//	- di.Resolve - resolves type
+//   - di.Provide - provide constructors
+//   - di.Invoke - add invocations
+//   - di.Resolve - resolves type
 type Option interface {
 	apply(c *Container)
 }
@@ -31,15 +29,15 @@ func Provide(constructor Constructor, options ...ProvideOption) Option {
 
 // Constructor is a function with follow signature:
 //
-// 	func NewHTTPServer(addr string, handler http.Handler) (server *http.Server, cleanup func(), err error) {
-// 		server := &http.Server{
-// 			Addr: addr,
-// 		}
-// 		cleanup = func() {
-// 			server.Close()
-// 		}
-// 		return server, cleanup, nil
-// 	}
+//	func NewHTTPServer(addr string, handler http.Handler) (server *http.Server, cleanup func(), err error) {
+//		server := &http.Server{
+//			Addr: addr,
+//		}
+//		cleanup = func() {
+//			server.Close()
+//		}
+//		return server, cleanup, nil
+//	}
 //
 // This constructor function teaches container how to build server. Arguments (addr and handler) in this function
 // is a dependencies. They will be resolved automatically when someone needs a server. Constructor may have unlimited
@@ -62,29 +60,29 @@ type ProvideOption interface {
 //
 // Create type constructors:
 //
-// 		func NewServeMux() *http.ServeMux {
-// 			return &http.ServeMux{}
-// 		}
+//	func NewServeMux() *http.ServeMux {
+//		return &http.ServeMux{}
+//	}
 //
-//		func NewServer(handler *http.Handler) *http.Server {
-//			return &http.Server{
-//				Handler: handler,
-//			}
+//	func NewServer(handler *http.Handler) *http.Server {
+//		return &http.Server{
+//			Handler: handler,
 //		}
+//	}
 //
 // Build container with di.As provide option:
 //
-//		container, err := di.New(
-//			di.Provide(NewServer),
-//			di.Provide(NewServeMux, di.As(new(http.Handler)),
-//		)
-//		if err != nil {
-//			// handle error
-//		}
-//		var server *http.Server
-//		if err := container.Resolve(&http.Server); err != nil {
-//			// handle error
-//		}
+//	container, err := di.New(
+//		di.Provide(NewServer),
+//		di.Provide(NewServeMux, di.As(new(http.Handler)),
+//	)
+//	if err != nil {
+//		// handle error
+//	}
+//	var server *http.Server
+//	if err := container.Resolve(&http.Server); err != nil {
+//		// handle error
+//	}
 //
 // In this example you can see how container inject type *http.ServeMux as http.Handler
 // interface into the server constructor.
@@ -94,10 +92,10 @@ type ProvideOption interface {
 // Container automatically creates group for interfaces. For example, you can use type []http.Handler in
 // previous example.
 //
-//		var handlers []http.Handler
-//		if err := container.Resolve(&handlers); err != nil {
-//			// handle error
-//		}
+//	var handlers []http.Handler
+//	if err := container.Resolve(&handlers); err != nil {
+//		// handle error
+//	}
 //
 // Container checks that provided type implements interface if not cause compile error.
 func As(interfaces ...Interface) ProvideOption {
@@ -120,20 +118,19 @@ func WithName(name string) ProvideOption {
 // Prototype modifies Provide() behavior. By default, each type resolves as a singleton. This option sets that
 // each type resolving creates a new instance of the type.
 //
-//		container, err := di.New(
-// 			Provide(NewHTTPServer, inject.Prototype())
-//		)
-//		if err != nil {
-//			// handle error
-//		}
-// 		var server1, server2 *http.Server
-// 		if err := container.Resolve(&server1); err != nil {
-//			// handle error
-//		}
-//		if err := container.Resolve(&server2); err != nil {
-//			// handle error
-//		}
-//
+//	container, err := di.New(
+//		Provide(NewHTTPServer, inject.Prototype())
+//	)
+//	if err != nil {
+//		// handle error
+//	}
+//	var server1, server2 *http.Server
+//	if err := container.Resolve(&server1); err != nil {
+//		// handle error
+//	}
+//	if err := container.Resolve(&server2); err != nil {
+//		// handle error
+//	}
 func Prototype() ProvideOption {
 	return provideOption(func(params *ProvideParams) {
 		params.IsPrototype = true
@@ -169,9 +166,9 @@ func Invoke(fn Invocation, options ...InvokeOption) Option {
 
 // Invocation is a function whose signature looks like:
 //
-//		func StartServer(server *http.Server) error {
-//			return server.ListenAndServe()
-//		}
+//	func StartServer(server *http.Server) error {
+//		return server.ListenAndServe()
+//	}
 //
 // Like a constructor invocation may have unlimited count of arguments and
 // they will be resolved automatically. The invocation can return an optional error.
@@ -180,21 +177,21 @@ type Invocation interface{}
 
 // Options group together container options.
 //
-//   account := di.Options(
-//     di.Provide(NewAccountController),
-//     di.Provide(NewAccountRepository),
-//   )
-//   auth := di.Options(
-//     di.Provide(NewAuthController),
-//     di.Provide(NewAuthRepository),
-//   )
-//   container, err := di.New(
-//     account,
-//     auth,
-//   )
-//   if err != nil {
-//     // handle error
-//   }
+//	account := di.Options(
+//	  di.Provide(NewAccountController),
+//	  di.Provide(NewAccountRepository),
+//	)
+//	auth := di.Options(
+//	  di.Provide(NewAuthController),
+//	  di.Provide(NewAuthRepository),
+//	)
+//	container, err := di.New(
+//	  account,
+//	  auth,
+//	)
+//	if err != nil {
+//	  // handle error
+//	}
 func Options(options ...Option) Option {
 	return option(func(container *Container) {
 		for _, opt := range options {

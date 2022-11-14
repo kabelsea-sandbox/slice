@@ -7,8 +7,8 @@ import (
 	"github.com/nats-io/nats.go"
 	"github.com/pkg/errors"
 
-	"slice"
-	natsbundle "slice/bundle/nats"
+	"github.com/kabelsea-sandbox/slice"
+	natsbundle "github.com/kabelsea-sandbox/slice/bundle/nats"
 )
 
 // Bundle integrates Nats Jetstream.

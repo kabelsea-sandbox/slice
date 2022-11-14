@@ -6,9 +6,8 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/kabelsea-sandbox/slice/slicetest"
 	"github.com/stretchr/testify/require"
-
-	"slice/slicetest"
 )
 
 var (

@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 // ServerWorker control lifecycle for HTTP server.

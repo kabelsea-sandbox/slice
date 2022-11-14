@@ -1,15 +1,16 @@
 package main
 
 import (
-	"slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice"
+	"github.com/kabelsea-sandbox/slice/bundle/envconfig"
+	"github.com/kabelsea-sandbox/slice/bundle/monitoring"
+	"github.com/kabelsea-sandbox/slice/bundle/zap"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 
 	"google.golang.org/grpc"
 
-	"slice"
-	"slice/bundle/envconfig"
-	grpcbundle "slice/bundle/grpc"
-	"slice/bundle/monitoring"
-	"slice/bundle/zap"
+	"github.com/kabelsea-sandbox/slice"
+	grpcbundle "github.com/kabelsea-sandbox/slice"
 )
 
 // UserService

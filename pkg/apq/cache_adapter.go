@@ -5,7 +5,7 @@ import (
 
 	"go.uber.org/zap"
 
-	"slice/pkg/caching"
+	"github.com/kabelsea-sandbox/slice/pkg/caching"
 )
 
 //go:generate mockgen --package=apqmock -destination=mocks/mock_cache_adapter.go . CacheAdapter

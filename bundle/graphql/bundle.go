@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"time"
 
-	"slice"
-	httpbundle "slice/bundle/http"
-	"slice/pkg/apq"
-	"slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice"
+	httpbundle "github.com/kabelsea-sandbox/slice/bundle/http"
+	"github.com/kabelsea-sandbox/slice/pkg/apq"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/handler"

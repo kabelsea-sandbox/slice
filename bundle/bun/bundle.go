@@ -3,7 +3,7 @@ package bun
 import (
 	"context"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/stdlib"

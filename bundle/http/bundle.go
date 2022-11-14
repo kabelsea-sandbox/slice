@@ -8,9 +8,9 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"slice"
-	"slice/pkg/di"
-	"slice/pkg/run"
+	"github.com/kabelsea-sandbox/slice"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice/pkg/run"
 )
 
 // Controller

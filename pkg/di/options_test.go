@@ -5,9 +5,8 @@ import (
 	"net/http"
 	"testing"
 
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 	"github.com/stretchr/testify/require"
-
-	"slice/pkg/di"
 )
 
 func TestOptions(t *testing.T) {

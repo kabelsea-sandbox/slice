@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	di "slice/pkg/di"
+	di "github.com/kabelsea-sandbox/slice/pkg/di"
 )
 
 // MockContainerBuilder is a mock of ContainerBuilder interface.

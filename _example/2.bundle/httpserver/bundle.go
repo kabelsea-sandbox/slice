@@ -3,7 +3,7 @@ package httpserver
 import (
 	"net/http"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 // Bundle

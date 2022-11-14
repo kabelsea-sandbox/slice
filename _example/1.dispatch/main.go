@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 func SayHello() {

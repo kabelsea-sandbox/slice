@@ -3,11 +3,10 @@ package natstrace
 import (
 	"context"
 
+	"github.com/kabelsea-sandbox/slice/pkg/natsclient"
 	"github.com/nats-io/nats.go"
 	"go.opencensus.io/trace"
 	"go.opencensus.io/trace/propagation"
-
-	"slice/pkg/natsclient"
 )
 
 // Tracing

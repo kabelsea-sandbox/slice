@@ -8,11 +8,11 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"slice"
-	"slice/pkg/di"
-	"slice/pkg/zaplog"
-	ctxzap "slice/pkg/zaplog/ctx"
-	"slice/pkg/zapsentry"
+	"github.com/kabelsea-sandbox/slice"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice/pkg/zaplog"
+	ctxzap "github.com/kabelsea-sandbox/slice/pkg/zaplog/ctx"
+	"github.com/kabelsea-sandbox/slice/pkg/zapsentry"
 )
 
 // Bundle integrate zap logging.

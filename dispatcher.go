@@ -3,7 +3,7 @@ package slice
 import (
 	"context"
 
-	"slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 )
 
 //go:generate mockgen -package=slice -destination=./dispatcher_mock_test.go -source=./dispatcher.go Dispatcher

@@ -6,8 +6,8 @@ import (
 
 	"github.com/nats-io/nats.go"
 
-	"slice"
-	ctxzap "slice/pkg/zaplog/ctx"
+	"github.com/kabelsea-sandbox/slice"
+	ctxzap "github.com/kabelsea-sandbox/slice/pkg/zaplog/ctx"
 )
 
 func NewSubscriptionWorker(logger slice.Logger, conn *nats.Conn, factory *SubscriptionFactory) *SubscriptionWorker {

@@ -9,9 +9,8 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 	"github.com/stretchr/testify/require"
-
-	"slice/pkg/di"
 )
 
 func TestContainer_Resolve(t *testing.T) {

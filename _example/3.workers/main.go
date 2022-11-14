@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"slice"
-	"slice/bundle/zap"
-	"slice/pkg/di"
-	"slice/pkg/run"
+	"github.com/kabelsea-sandbox/slice"
+	"github.com/kabelsea-sandbox/slice/bundle/zap"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice/pkg/run"
 )
 
 // Application

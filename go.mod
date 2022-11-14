@@ -1,4 +1,4 @@
-module slice
+module github.com/kabelsea-sandbox/slice
 
 go 1.19
 

@@ -7,7 +7,7 @@ import (
 	"firebase.google.com/go/v4/auth"
 	"google.golang.org/api/option"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 type Bundle struct {

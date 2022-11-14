@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"slice/pkg/di"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 )
 
 //go:generate mockgen -package=slice -destination=./container_mock_test.go -source=./container.go \

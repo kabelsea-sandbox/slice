@@ -13,7 +13,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	ctxzap "slice/pkg/zaplog/ctx"
+	ctxzap "github.com/kabelsea-sandbox/slice/pkg/zaplog/ctx"
 )
 
 // ServerLogging is a middleware for server logging.

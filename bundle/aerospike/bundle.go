@@ -3,7 +3,7 @@ package aerospike
 import (
 	"github.com/aerospike/aerospike-client-go"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 type Bundle struct {

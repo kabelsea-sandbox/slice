@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"slice"
+	"github.com/kabelsea-sandbox/slice"
 )
 
 type contextKey string

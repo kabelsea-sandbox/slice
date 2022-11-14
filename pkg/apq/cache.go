@@ -1,6 +1,6 @@
 package apq
 
-import "slice/pkg/caching"
+import "github.com/kabelsea-sandbox/slice/pkg/caching"
 
 //go:generate mockgen --package=apqmock -destination=mocks/mock_cache_apq.go . CacheAPQ
 
