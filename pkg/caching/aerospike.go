@@ -2,11 +2,13 @@ package caching
 
 import (
 	"context"
+	"log"
 	"time"
 
 	as "github.com/aerospike/aerospike-client-go"
 	ast "github.com/aerospike/aerospike-client-go/types"
 	"github.com/eko/gocache/v3/store"
+	"github.com/imdario/mergo"
 	"github.com/pkg/errors"
 )
 
@@ -17,16 +19,33 @@ type AerospikeStore interface {
 }
 
 type aerospikeStore struct {
-	client    *as.Client
-	namespace string
-	setName   string
+	client      *as.Client
+	writePolicy *as.WritePolicy
+	config      *AerospikeStoreConfig
 }
 
-func NewAerospikeStore(client *as.Client, namespace, setName string) AerospikeStore {
+type AerospikeStoreConfig struct {
+	Namespace string
+	SetName   string
+	TTL       uint32
+}
+
+var (
+	aerospikeStoreDefaultConfig = AerospikeStoreConfig{
+		Namespace: "default",
+		SetName:   "cache",
+		TTL:       60,
+	}
+)
+
+func NewAerospikeStore(client *as.Client, config *AerospikeStoreConfig) AerospikeStore {
+	if err := mergo.Merge(config, aerospikeStoreDefaultConfig); err != nil {
+		log.Panic(err)
+	}
 	return &aerospikeStore{
-		client:    client,
-		namespace: namespace,
-		setName:   setName,
+		client:      client,
+		writePolicy: as.NewWritePolicy(0, config.TTL),
+		config:      config,
 	}
 }
 
@@ -40,7 +59,7 @@ func (a *aerospikeStore) options(opts ...store.Option) *store.Options {
 }
 
 func (a *aerospikeStore) key(value any) (*as.Key, error) {
-	asKey, err := as.NewKey(a.namespace, a.setName, value)
+	asKey, err := as.NewKey(a.config.Namespace, a.config.SetName, value)
 	if err != nil {
 		return nil, errors.Wrap(err, "aerospike key failed")
 	}
@@ -82,7 +101,7 @@ func (a *aerospikeStore) Set(ctx context.Context, key any, value any, opts ...st
 		"data": value,
 	}
 
-	if err := a.client.Put(as.NewWritePolicy(0, 60), asKey, bins); err != nil {
+	if err := a.client.Put(a.writePolicy, asKey, bins); err != nil {
 		return errors.Wrap(err, "aerospike set failed")
 	}
 	return nil

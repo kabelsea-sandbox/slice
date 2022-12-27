@@ -8,8 +8,7 @@ import (
 	"syscall"
 
 	"github.com/kabelsea-sandbox/slice"
-
-	"github.com/kabelsea-sandbox/slice"
+	"github.com/kabelsea-sandbox/slice/_example/2.bundle/httpserver"
 )
 
 // StartServer

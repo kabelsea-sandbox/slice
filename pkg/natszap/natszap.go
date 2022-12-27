@@ -5,8 +5,9 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/kabelsea-sandbox/slice/pkg/natsclient"
 	ctxzap "github.com/kabelsea-sandbox/slice/pkg/zaplog/ctx"
+
+	"github.com/kabelsea-sandbox/slice/pkg/natsclient"
 )
 
 // Logging

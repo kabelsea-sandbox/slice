@@ -7,10 +7,13 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/rs/cors"
+
+	"github.com/kabelsea-sandbox/slice/pkg/run"
+
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 
 	"github.com/kabelsea-sandbox/slice"
-	"github.com/kabelsea-sandbox/slice/pkg/di"
-	"github.com/kabelsea-sandbox/slice/pkg/run"
 )
 
 // Controller
@@ -68,7 +71,16 @@ func (b Bundle) Shutdown(ctx context.Context, container slice.Container) (err er
 
 // NewRouter creates http router.
 func (b Bundle) NewRouter() *chi.Mux {
-	return chi.NewRouter()
+	router := chi.NewRouter()
+
+	router.Use(cors.AllowAll().Handler)
+
+	// router.Use(cors.New(cors.Options{
+	// 	AllowedOrigins: []string{"*"},
+	// 	// AllowCredentials: true,
+	// 	// Debug:            true,
+	// }).Handler)
+	return router
 }
 
 // NewServer creates http server

@@ -9,9 +9,11 @@ import (
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"
 
-	"github.com/kabelsea-sandbox/slice"
-	httpbundle "github.com/kabelsea-sandbox/slice/bundle/http"
 	"github.com/kabelsea-sandbox/slice/pkg/di"
+
+	httpbundle "github.com/kabelsea-sandbox/slice/bundle/http"
+
+	"github.com/kabelsea-sandbox/slice"
 )
 
 // Interface helpers for di.As(..)

@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kabelsea-sandbox/slice/pkg/di"
-
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
+
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 )
 
 func TestLifecycle_initialization(t *testing.T) {

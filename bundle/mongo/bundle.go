@@ -5,9 +5,11 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"github.com/kabelsea-sandbox/slice"
-	slcmongo "github.com/kabelsea-sandbox/slice/pkg/mongo"
 	ctxmongo "github.com/kabelsea-sandbox/slice/pkg/mongo/ctx"
+
+	slcmongo "github.com/kabelsea-sandbox/slice/pkg/mongo"
+
+	"github.com/kabelsea-sandbox/slice"
 )
 
 // Bundle provides mongo db integration.

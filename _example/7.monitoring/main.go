@@ -5,16 +5,14 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/kabelsea-sandbox/slice"
-	"github.com/kabelsea-sandbox/slice/bundle/monitoring"
-	"github.com/kabelsea-sandbox/slice/pkg/di"
-
 	"go.opencensus.io/plugin/ocgrpc"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 
 	"github.com/kabelsea-sandbox/slice"
+	"github.com/kabelsea-sandbox/slice/bundle/monitoring"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 )
 
 var (

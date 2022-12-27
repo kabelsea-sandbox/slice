@@ -5,9 +5,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/kabelsea-sandbox/slice"
-	"github.com/kabelsea-sandbox/slice/pkg/di"
 	"github.com/kabelsea-sandbox/slice/pkg/run"
+
+	"github.com/kabelsea-sandbox/slice/pkg/di"
+
+	"github.com/kabelsea-sandbox/slice"
 
 	machinery "github.com/RichardKnop/machinery/v2"
 	"github.com/RichardKnop/machinery/v2/config"

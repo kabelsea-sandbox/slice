@@ -3,9 +3,9 @@ package machinery
 import (
 	"context"
 
-	machinery "github.com/RichardKnop/machinery/v2"
-
 	"github.com/kabelsea-sandbox/slice/pkg/run"
+
+	machinery "github.com/RichardKnop/machinery/v2"
 )
 
 // Worker adapter for slice run.Worker interface

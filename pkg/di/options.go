@@ -1,6 +1,8 @@
 package di
 
-import "github.com/kabelsea-sandbox/slice/pkg/di/internal/stacktrace"
+import (
+	"github.com/kabelsea-sandbox/slice/pkg/di/internal/stacktrace"
+)
 
 // Option is a functional option that configures container. If you don't know about functional
 // options, see https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis.

@@ -41,7 +41,7 @@ func (e *TestBundleInvocationOrder) Shutdown(ctx context.Context, invoker slice.
 }
 
 func TestRun(t *testing.T) {
-	t.Run("github.com/kabelsea-sandbox/slice", func(t *testing.T) {
+	t.Run("slice runs invoke function", func(t *testing.T) {
 		var invokeCalled bool
 		slice.Run(
 			slice.SetName("test"),

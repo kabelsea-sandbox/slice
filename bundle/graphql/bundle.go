@@ -5,11 +5,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/kabelsea-sandbox/slice"
-	httpbundle "github.com/kabelsea-sandbox/slice/bundle/http"
-	"github.com/kabelsea-sandbox/slice/pkg/apq"
-	"github.com/kabelsea-sandbox/slice/pkg/di"
-
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/handler/apollotracing"
@@ -17,12 +12,18 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler/transport"
 	"github.com/gorilla/websocket"
 	"github.com/pkg/errors"
+
+	"github.com/kabelsea-sandbox/slice"
+	httpbundle "github.com/kabelsea-sandbox/slice/bundle/http"
+	"github.com/kabelsea-sandbox/slice/pkg/apq"
+	"github.com/kabelsea-sandbox/slice/pkg/di"
 )
 
 type Bundle struct {
-	Playground    bool `envconfig:"GRAPHQL_PLAYGROUND_ENABLED" default:"False"`
-	Tracing       bool `envconfig:"GRAPHQL_TRACING_ENABLED" default:"False"`
-	Intorspection bool `envconfig:"GRAPHQL_INTROSPECTION_ENABLED" default:"False"`
+	Playground      bool `envconfig:"GRAPHQL_PLAYGROUND_ENABLED" default:"False"`
+	Tracing         bool `envconfig:"GRAPHQL_TRACING_ENABLED" default:"False"`
+	Intorspection   bool `envconfig:"GRAPHQL_INTROSPECTION_ENABLED" default:"False"`
+	ComplexityLimit int  `envconfig:"GRAPHQL_COMPLEXITY_LIMIT" default:"500"`
 
 	Websocket             bool
 	WebsocketPingInterval time.Duration `envconfig:"GRAPHQL_WEBSOCKET_PING_INTERVAL" default:"5s"`
@@ -79,6 +80,8 @@ func (b *Bundle) NewServer(schema graphql.ExecutableSchema, cacheAPQ apq.CacheAd
 	server.AddTransport(transport.POST{})
 	server.AddTransport(transport.GET{})
 	server.AddTransport(transport.MultipartForm{})
+
+	server.Use(extension.FixedComplexityLimit(b.ComplexityLimit))
 
 	// tracing, do not use on production
 	if b.Tracing {

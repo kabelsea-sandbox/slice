@@ -3,19 +3,20 @@ package bun
 import (
 	"context"
 
-	"github.com/kabelsea-sandbox/slice"
-
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/stdlib"
 	"github.com/pkg/errors"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/extra/bundebug"
+
+	"github.com/kabelsea-sandbox/slice"
 )
 
 // Bundle is a postgres bundle. It provides configured database instance and provide db into slice.Context.
 type Bundle struct {
-	ConnString string `envconfig:"postgres_conn_string" required:"True"`
+	ConnString string `envconfig:"postgres_conn_string" required:"false"`
+	Debug      bool   `envconfig:"postgres_debug" default:"false"`
 }
 
 // Build provide database to di.
@@ -40,7 +41,7 @@ func (b *Bundle) NewDB() (*bun.DB, error) {
 		return nil, errors.Wrap(err, "postgres connection failed")
 	}
 
-	config.PreferSimpleProtocol = true
+	// config.PreferSimpleProtocol = true
 
 	db := bun.NewDB(
 		stdlib.OpenDB(*config),
@@ -50,11 +51,12 @@ func (b *Bundle) NewDB() (*bun.DB, error) {
 		}...,
 	)
 
-	db.AddQueryHook(
-		bundebug.NewQueryHook(
-			bundebug.WithVerbose(true),
-		),
-	)
-
+	if b.Debug {
+		db.AddQueryHook(
+			bundebug.NewQueryHook(
+				bundebug.WithVerbose(true),
+			),
+		)
+	}
 	return db, nil
 }
